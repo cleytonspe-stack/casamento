@@ -1,0 +1,8 @@
+{
+  "name": "Casamento",
+  "short_name": "Casamento",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b89b5e"
+}

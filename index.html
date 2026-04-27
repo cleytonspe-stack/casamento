@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosso Casamento</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body { margin:0; font-family:Arial; background:#f2f2f2; }
+header { background:#b89b5e; color:white; padding:15px; text-align:center; }
+.container { padding:15px; }
+.card { background:white; padding:15px; border-radius:15px; margin-bottom:15px; }
+button { width:100%; padding:10px; background:#b89b5e; color:white; border:none; border-radius:10px; }
+input, select { width:100%; padding:10px; margin-top:10px; }
+.item { background:#eee; padding:8px; margin-top:5px; border-radius:8px; }
+</style>
+</head>
+<body>
+
+<header>💍 Nosso Casamento</header>
+
+<div class="container">
+<div class="card">
+  <h3>SEU NOME & PARCEIRO(A)</h3>
+  <p>📅 20/09/2025 - ⏰ 16:30</p>
+</div>
+
+<div class="card">
+  <h3>Confirme sua presença</h3>
+  <input id="nome" placeholder="Seu nome">
+  <select id="presenca">
+    <option value="Sim">Vou comparecer</option>
+    <option value="Não">Não poderei ir</option>
+  </select>
+  <button onclick="confirmar()">Confirmar</button>
+</div>
+
+<div class="card">
+  <h3>👥 Convidados</h3>
+  <div id="lista"></div>
+</div>
+</div>
+
+<script>
+let convidados = JSON.parse(localStorage.getItem("convidados")) || [];
+
+function atualizarLista(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+  convidados.forEach(c=>{
+    lista.innerHTML += `<div class="item">${c.nome} - ${c.presenca}</div>`;
+  });
+}
+
+function confirmar(){
+  const nome = document.getElementById("nome").value;
+  const presenca = document.getElementById("presenca").value;
+
+  if(!nome) return alert("Digite seu nome");
+
+  convidados.push({nome, presenca});
+  localStorage.setItem("convidados", JSON.stringify(convidados));
+  atualizarLista();
+  document.getElementById("nome").value="";
+}
+
+atualizarLista();
+</script>
+
+</body>
+</html>
